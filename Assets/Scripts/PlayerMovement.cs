@@ -4,28 +4,23 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    float moveSpeed = 5f;
+    [SerializeField] private float _moveSpeed = 5f;
 
-    Rigidbody m_Rigidbody;
-    Vector3 m_Movement;
+    [SerializeField] private Rigidbody _rigidbody;
 
-    void Start()
-    {
-        m_Rigidbody = GetComponent<Rigidbody>();
+    private Vector3 _movement;
 
-    }
-
-    void Update()
-    {
-        //for pc
-        /*float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        m_Movement.Set(horizontal, 0f, vertical);
-        m_Movement.Normalize();*/
-
-    }
     private void FixedUpdate()
     {
+        //TODO: INPUT SCRIPT
+        #if UNITY_STANDALONE
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        _movement.Set(horizontal, 0f, vertical);
+        _movement.Normalize();
+        #endif
+
+        #if UNITY_ANDROID
         //for mobile
         if (Input.touchCount > 0)
         {
@@ -37,10 +32,8 @@ public class PlayerMovement : MonoBehaviour
                 m_Movement.Set(0f,0f,0f);
             m_Movement.Normalize();
         }
+        #endif
         MovePlayer();
     }
-    void MovePlayer()
-    {
-        m_Rigidbody.velocity = (Vector3.forward * moveSpeed) + (m_Movement *moveSpeed);
-    }
+    void MovePlayer() => _rigidbody.velocity = (Vector3.forward + _movement ) *_moveSpeed;
 }

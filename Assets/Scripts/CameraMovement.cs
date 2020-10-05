@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 5f; //TODO MAKE FROM SETTINGS
 
-    Rigidbody m_Rigidbody;
+    [SerializeField] private Rigidbody m_Rigidbody;
 
-    void Start()
-    {
-        m_Rigidbody = GetComponent<Rigidbody>();
-    }
+    private void OnEnable() => Player.OnDefeat += HandleDefeat;
+    private void OnDisable() => Player.OnDefeat -= HandleDefeat;
 
-    private void FixedUpdate()
-    {
-        MoveCam();
-    }
+    private void HandleDefeat() => this.enabled = false;
+
+    private void FixedUpdate() => MoveCam();
     void MoveCam()
     {
         float speedPerSec = moveSpeed * Time.deltaTime;

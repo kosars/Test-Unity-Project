@@ -1,32 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static event Action OnDefeat;
+
     public Color32 color;
-    public bool isSwitched = false;
-    public AudioSource collisionAudio;
+    public bool isSwitched = false; //TODO:Make enum and state Machine
 
-    MeshRenderer m_MeshRenderer;
-    GamePalletes m_GamePalletes;
-    ParticleSystemRenderer m_ParticleSystemRenderer;
-    void Start()
-    {
-        m_MeshRenderer = GetComponent<MeshRenderer>();
-        m_GamePalletes = GameObject.Find("Game").GetComponent<GamePalletes>();
-        m_ParticleSystemRenderer = GetComponentInChildren<ParticleSystemRenderer>();
-        SetPrimaryColor();
+    [SerializeField] private AudioSource collisionAudio;
+    [SerializeField] private MeshRenderer m_MeshRenderer;
+    [SerializeField] private GamePalletes m_GamePalletes; //TODO: MAKE CHARACTER RENDERER SCRIPT
+    [SerializeField] private ParticleSystemRenderer m_ParticleSystemRenderer;
+    void Start() => SetPrimaryColor();//TODO: CHARACTER COLOR SCRIPT
 
-    }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision) //TODO: CHARACTER COLLISION SCRIPT
     {
         if (collision.gameObject.TryGetComponent<ColorObject>(out ColorObject component))
         {
             collisionAudio.Play();
             if (!component.color.Equals(this.color))
+            {
                 GameObject.Find("Game").GetComponent<GameState>().Defeat();
+                OnDefeat?.Invoke();
+            }
         }
     }
 

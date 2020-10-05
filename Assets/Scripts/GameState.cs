@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
 {
+
+    //TODO: STATE MACHINE????
     public GameObject startMenuUI;
     public GameObject restartMenuUI;
 

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3367218532965213251}
   - component: {fileID: 3367218532965213250}
   - component: {fileID: 3367218532965213256}
+  - component: {fileID: 3190278101947074168}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -128,7 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c13b5f2ec5f8c684c97f2f28c61dc6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Joystick: {fileID: 0}
+  _moveSpeed: 5
+  _rigidbody: {fileID: 0}
 --- !u!114 &3367218532965213256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +148,22 @@ MonoBehaviour:
     rgba: 0
   isSwitched: 0
   collisionAudio: {fileID: 6827288543284240080}
+  m_MeshRenderer: {fileID: 0}
+  m_GamePalletes: {fileID: 0}
+  m_ParticleSystemRenderer: {fileID: 0}
+--- !u!114 &3190278101947074168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3367218532965213249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a8c85f4f380824d9aec5a2f6b13740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shatteredPrefab: {fileID: 5028557726609004760, guid: 59ac1990b5c7a714dab1f7b7b5f5beb7, type: 3}
 --- !u!1 &5331027690836042580
 GameObject:
   m_ObjectHideFlags: 0
